@@ -1,4 +1,6 @@
-﻿using System;
+﻿//imported necessary namespaces for Selenium WebDriver and Chrome WebDriver.using System;
+
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using WebDriverManager.DriverConfigs.Impl;
@@ -13,8 +15,10 @@ namespace Program
         {
             // Set the path to the ChromeDriver
             new DriverManager().SetUpDriver(new ChromeConfig());
-            string driverPath = @"C:\Users\user\source\repos\Spanish\Spanish\bin\Debug\net6.0\New folder\Newfolder\chromedriver.exe";
-            IWebDriver driver = new ChromeDriver(driverPath);
+
+            // Set Chromedriver path
+            string drivePath = @". chromedriver.exe";
+            IWebDriver driver = new ChromeDriver(drivePath);
 
 
             try
@@ -23,13 +27,13 @@ namespace Program
                 driver.Navigate().GoToUrl("https://www.spanishpoint.ie/");
 
 
-                // Wait for the cookie popup to appear (modify the time according to your needs)
-                System.Threading.Thread.Sleep(5000); // Wait for 5 seconds (adjust as needed)
+                // Wait for the cookie popup to appear 
+                System.Threading.Thread.Sleep(3000); // Wait for 3 seconds (adjust as needed)
 
-                // Find the "Reject" or "Decline" button and click it
+                // Find the "Reject" or "Decline" button and click it if present
                 try
                 {
-                    IWebElement rejectButton = driver.FindElement(By.LinkText("Reject")); // Adjust the locator as needed
+                    IWebElement rejectButton = driver.FindElement(By.LinkText("Reject")); // Adjust the locator
                     rejectButton.Click();
                 }
                 catch (NoSuchElementException)
@@ -38,44 +42,41 @@ namespace Program
                     // Handle the case accordingly.
                 }
 
-                // Continue with the rest of the actions on the website
-                // ...
-            
+                // Continue...
 
-                driver.Manage().Window.Maximize();
+                //maximize the browser window(optional)
+                driver.Manage().Window.Maximize(); 
 
                 System.Threading.Thread.Sleep(3000);
 
                 // Step 2: Navigate to the 'Solutions & Services' section and select 'Modern Work'
-                IWebElement solutionsServicesLink = driver.FindElement(By.LinkText("Solutions & Services"));
+                IWebElement solutionsServicesLink = driver.FindElement(By.LinkText("Solutions & Services")); //findind element using LinkText
                 solutionsServicesLink.Click();
 
-                Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(3000);
 
                 IWebElement modernWorkLink = driver.FindElement(By.LinkText("Modern Work"));
                 modernWorkLink.Click();
 
-                Thread.Sleep(3000);
-                //driver.FindElement(By.XPath("//*[@id=\"wt-cli-reject-btn\"]")).Click();
+                System.Threading.Thread.Sleep(3000);
 
+                // Scrolling down webpage
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
 
                 System.Threading.Thread.Sleep(3000);
 
-                js.ExecuteScript("window.scrollBy(0,250)");
+                js.ExecuteScript("window.scrollBy(0,500)");
 
 
                 // Step 3: Click the 'Content & Collaboration' tab under the 'Modern Workplace Solutions' header
-                //IWebElement contentCollaborationTab = driver.FindElement(By.XPath("//h2[text()='Modern Workplace Solutions']/following-sibling::ul//a[text()='Content & Collaboration']"));
-                //contentCollaborationTab.Click();
-                Thread.Sleep(5000); 
+                System.Threading.Thread.Sleep(3000);
                 IWebElement solutionsServicesLink1 = driver.FindElement(By.LinkText("Content & Collaboration"));
                 solutionsServicesLink1.Click();
 
                 // Step 4: Assert that there is a header with the text 'Content & Collaboration'
-                //IWebElement headerElement = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[1]/ul/li[2]/a/span"));
+                
                 IWebElement headerElement = driver.FindElement(By.LinkText("Content & Collaboration"));
-               
+
                 string headerText = headerElement.Text;
                 if (headerText.Contains("Content & Collaboration"))
                 {
@@ -86,9 +87,11 @@ namespace Program
                     Console.WriteLine("Header with text 'Content & Collaboration' is NOT displayed.");
                 }
 
-                Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(3000);
 
                 // Step 5: Assert that the displayed paragraph starts with the specified text
+                //findind element by XPath
+                
                 IWebElement paragraphElement = driver.FindElement(By.XPath("//*[@id=\"1612870161121-10af43ab-0ec4\"]/div[2]/div/div[2]/div/div/div[1]/div/p"));
                 string paragraphText = paragraphElement.Text;
                 string expectedStartText = "Spanish Point customers tell us that people are their most important asset";
@@ -103,7 +106,7 @@ namespace Program
             }
             finally
             {
-                driver.Quit();
+                driver.Quit(); // Close the browser and quit the WebDriver
             }
         }
     }

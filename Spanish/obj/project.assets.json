@@ -792,11 +792,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\source\\repos\\Spanish\\Spanish\\Spanish.csproj",
+      "projectUniqueName": "C:\\Users\\user\\source\\repos\\SpanishPointWebsite-SeleniumAutomation\\Spanish\\Spanish.csproj",
       "projectName": "Spanish",
-      "projectPath": "C:\\Users\\user\\source\\repos\\Spanish\\Spanish\\Spanish.csproj",
+      "projectPath": "C:\\Users\\user\\source\\repos\\SpanishPointWebsite-SeleniumAutomation\\Spanish\\Spanish.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\source\\repos\\Spanish\\Spanish\\obj\\",
+      "outputPath": "C:\\Users\\user\\source\\repos\\SpanishPointWebsite-SeleniumAutomation\\Spanish\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
